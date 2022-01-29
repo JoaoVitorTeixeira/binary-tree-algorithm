@@ -1,6 +1,6 @@
 import NodeTree from "./NodeTree";
 
-export default class Tree {
+class Tree {
   private root: NodeTree;
 
   /**
@@ -83,6 +83,92 @@ export default class Tree {
       }, []);
 
     return result;
+  }
+
+  /**
+   *
+   * @returns The root of the tree in order traversal
+   */
+  public getInOrderTraversals(): number[] {
+    return this.recursiveInOrderTraversals(this.root);
+  }
+
+  /**
+   * It make a no binary tree.
+   * @param dataToCompare The data to compare and if is equal,
+   * the left and right nodes will be set to elements of the array
+   * @param elements An array of two elements: 0 - left, 1 - right
+   */
+  public addElementsAfterData(dataToCompare: number, elements: number[]) {
+    const queue = new Array<NodeTree>();
+
+    queue.push(this.root);
+
+    while (queue.length) {
+      const actualElement = queue.shift();
+
+      if (!actualElement) continue;
+
+      if (actualElement.data == dataToCompare) {
+        actualElement.leftNode =
+          elements[0] > -1 ? new NodeTree(elements[0]) : null;
+        actualElement.rightNode =
+          elements[1] > -1 ? new NodeTree(elements[1]) : null;
+
+        return;
+      }
+
+      queue.push(actualElement.leftNode);
+      queue.push(actualElement.rightNode);
+    }
+  }
+
+  /**
+   * Given a value, it will swap the the subtree of all the nodes at each depth h,
+   * where h is a multiple of value.
+   * @param value The value to swap
+   */
+  public swapNodes(value: number) {
+    this.recursiveSwapNode(this.root, value, 0);
+  }
+
+  /**
+   *
+   * @param root The root of the tree
+   * @param value The value to swap
+   * @param height The actual height
+   * @returns Nothing, just stop the recursion
+   */
+  public recursiveSwapNode(root: NodeTree, value: number, height: number) {
+    if (!root) return;
+
+    // Height is multiple of value
+    if (++height % value == 0) {
+      const nodeToChange = root.rightNode;
+
+      root.rightNode = root.leftNode;
+      root.leftNode = nodeToChange;
+    }
+
+    this.recursiveSwapNode(root.leftNode, value, height);
+    this.recursiveSwapNode(root.rightNode, value, height);
+  }
+
+  /**
+   *
+   * @param root The root of the tree
+   * @returns An array of in order traversal
+   */
+  private recursiveInOrderTraversals(root: NodeTree): number[] {
+    let queue = new Array<number>();
+
+    if (!root) return queue;
+
+    queue = queue.concat(this.recursiveInOrderTraversals(root.leftNode));
+    queue.push(root.data);
+    queue = queue.concat(this.recursiveInOrderTraversals(root.rightNode));
+
+    return queue;
   }
 
   /**
