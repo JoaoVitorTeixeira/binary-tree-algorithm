@@ -19,6 +19,50 @@ class Tree {
 
   /**
    *
+   * @returns An array of top view of the tree
+   */
+  public getToView(): number[] {
+    const queue = new Array<NodeTree>();
+    const mapTopView = new Map();
+    let horizontalDistance = 0;
+
+    this.root.horizontalDistance = horizontalDistance;
+    queue.push(this.root);
+
+    while (queue.length) {
+      const element = queue.shift();
+      horizontalDistance = element.horizontalDistance;
+
+      if (!mapTopView.has(horizontalDistance)) {
+        mapTopView.set(horizontalDistance, element.data);
+      }
+
+      if (element.leftNode) {
+        element.leftNode.horizontalDistance = horizontalDistance - 1;
+        queue.push(element.leftNode);
+      }
+
+      if (element.rightNode) {
+        element.rightNode.horizontalDistance = horizontalDistance + 1;
+        queue.push(element.rightNode);
+      }
+    }
+
+    /**
+     * There's no flaMap method :(
+     */
+    const result = Array.from(mapTopView)
+      .sort((a, b) => a[0] - b[0])
+      .reduce<number[]>((acc, element) => {
+        acc.unshift(element[1]);
+        return acc;
+      }, []);
+
+    return result;
+  }
+
+  /**
+   *
    * @param actualNode The actual node
    * @param actualHeight The actual height
    * @param greatestHeight The greatest height

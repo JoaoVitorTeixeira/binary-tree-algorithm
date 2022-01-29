@@ -1,5 +1,6 @@
 class NodeTree {
   public data: number;
+  public horizontalDistance: number;
   public rightNode: NodeTree;
   public leftNode: NodeTree;
 
