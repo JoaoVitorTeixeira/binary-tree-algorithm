@@ -43,7 +43,7 @@ class Tree {
    *
    * @returns An array of top view of the tree
    */
-  public getToView(): number[] {
+  public getTopView(): number[] {
     const queue = new Array<NodeTree>();
     const mapTopView = new Map();
     let horizontalDistance = 0;
