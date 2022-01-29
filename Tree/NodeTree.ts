@@ -1,4 +1,4 @@
-class NodeTree {
+export default class NodeTree {
   public data: number;
   public horizontalDistance: number;
   public rightNode: NodeTree;

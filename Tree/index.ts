@@ -1,4 +1,6 @@
-class Tree {
+import NodeTree from "./NodeTree";
+
+export default class Tree {
   private root: NodeTree;
 
   /**
