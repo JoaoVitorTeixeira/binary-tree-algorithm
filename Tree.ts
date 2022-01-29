@@ -19,6 +19,28 @@ class Tree {
 
   /**
    *
+   * @returns Level order of the tree in an array
+   */
+  public getLevelOrderInLine(): number[] {
+    const queue = new Array<NodeTree>();
+    const levelOrder = new Array<number>();
+
+    queue.push(this.root);
+
+    while (queue.length) {
+      const element = queue.shift();
+
+      levelOrder.push(element.data);
+
+      if (element.leftNode) queue.push(element.leftNode);
+      if (element.rightNode) queue.push(element.rightNode);
+    }
+
+    return levelOrder;
+  }
+
+  /**
+   *
    * @returns An array of top view of the tree
    */
   public getToView(): number[] {
