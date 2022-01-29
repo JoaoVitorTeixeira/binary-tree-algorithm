@@ -1,10 +1,18 @@
 export default class BalancedBrackets {
   private str: string;
 
+  /**
+   *
+   * @param str The string to check for balanced brackets
+   */
   constructor(str: string) {
     this.str = str;
   }
 
+  /**
+   *
+   * @returns true if the brackets are balanced, false otherwise
+   */
   public validate(): boolean {
     const stack = new Array<string>();
     for (const element of this.str) {
