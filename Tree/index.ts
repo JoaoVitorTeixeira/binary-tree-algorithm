@@ -97,7 +97,7 @@ class Tree {
    * It make a no binary tree.
    * @param dataToCompare The data to compare and if is equal,
    * the left and right nodes will be set to elements of the array
-   * @param elements An array of two elements: 0 - left, 1 - right
+   * @param elements An array of two elements: 0 - left, 1 - right; If is -1, it will be set to null
    */
   public addElementsAfterData(dataToCompare: number, elements: number[]) {
     const queue = new Array<NodeTree>();
