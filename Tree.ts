@@ -112,7 +112,7 @@ class Tree {
       return newElement;
     }
 
-    if (root.data > newElement.data) {
+    if (root.data < newElement.data) {
       root.rightNode = this.recursiveAddElement(root.rightNode, newElement);
     } else {
       root.leftNode = this.recursiveAddElement(root.leftNode, newElement);
