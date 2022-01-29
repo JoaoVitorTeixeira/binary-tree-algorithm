@@ -14,17 +14,18 @@ export default class BalancedBrackets {
    * @returns true if the brackets are balanced, false otherwise
    */
   public validate(): boolean {
-    const stack = new Array<string>();
+    const stackOpenedBracket = new Array<string>();
+
     for (const element of this.str) {
       if (element == "{" || element == "(" || element == "[") {
-        stack.push(element);
+        stackOpenedBracket.push(element);
         continue;
       }
 
       // Must close at least one bracket
-      if (stack.length == 0) return false;
+      if (stackOpenedBracket.length == 0) return false;
 
-      const toCheck = stack.pop();
+      const toCheck = stackOpenedBracket.pop();
 
       switch (element) {
         case "}":
@@ -41,6 +42,6 @@ export default class BalancedBrackets {
       }
     }
 
-    return stack.length == 0;
+    return stackOpenedBracket.length == 0;
   }
 }
